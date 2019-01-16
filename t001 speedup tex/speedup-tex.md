@@ -1,21 +1,17 @@
 ## 如何加速 LaTeX 编译
 
 
-### 半分钟速览
+### **十秒钟速览**
 
 1. 换用 Linux 系统
-
 2. 使用批处理模式，即编译时加上 `-interaction=batchmode` 参数
-
-3. 使用预编译技术，涉及到两条命令：
-
-- `etex -initialize -jobname="hello" "&pdflatex" "mylatexformat.ltx" "hello.tex"`
-- `pdflatex -shell-escape "&hello" hello.tex`
-
+3. 使用预编译技术，涉及到一个宏包（`mylatexformat`）和两条命令：
+    1.  `etex -initialize -jobname="hello" "&pdflatex" "mylatexformat.ltx" "hello.tex"`
+    2. `pdflatex -shell-escape "&hello" hello.tex`
 
 ---
 
-### 前言
+### **前言**
 
 “We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.”
 
@@ -42,7 +38,7 @@
 
 ---
 
-### 性能瓶颈分析
+### **性能瓶颈分析**
 
 正如开篇所言，仅凭模糊猜测和反复试验去做优化是非常低效的，这是企图用战术上的勤奋（不断调试）来掩盖战略上的懒惰（不去探究背后的原理和机制）。
 
@@ -88,7 +84,7 @@
 
 ---
 
-### 性能提升方法
+### **性能提升方法**
 
 上面扯了那么多瓶颈，那么下面谈一谈怎么改善这些瓶颈。
 
@@ -108,7 +104,7 @@ TeX 在 Linux 下的表现确实是大大优于 Windows 的。不过这个方法
 
 ---
 
-### 预编译流程
+### **预编译流程**
 假设你有这样一个 `hello.tex` 文件：
 
 ```
@@ -273,7 +269,7 @@ Transcript written on hello.log.
 ```
 
 ---
-### 相关资料
+### **相关资料**
 
 我在 TeX.SE 的 [这个问题](https://tex.stackexchange.com/questions/447486/is-it-possible-to-keep-tex-initial-files-sty-cfg-def-in-memory-in-order-t) 下已经罗列了大部分加速 TeX 编译的相关问题链接：
 
