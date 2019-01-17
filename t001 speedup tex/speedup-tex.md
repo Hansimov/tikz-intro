@@ -8,6 +8,7 @@
 3. 使用预编译技术，涉及到一个宏包（`mylatexformat`）和两条命令：
     1.  `etex -initialize -jobname="hello" "&pdflatex" "mylatexformat.ltx" "hello.tex"`
     2. `pdflatex -shell-escape "&hello" hello.tex`
+4. 一些其他（作用较小的或者适用范围狭窄的）技巧
 
 ---
 
@@ -80,7 +81,10 @@
 
 结论是：几乎不可行。除非你能将 TeX 的 CPU 指令转换为 GPU 指令，并且让操作系统支持这些操作。
 
-另外，不同的编译模式也会产生细微的影响。经过测试，使用批处理模式（`batchmode`）速度要优于默认的模式（不加参数）和其他一些模式（比如 `nonstopmode` 和 `scrollmode`）， 这是因为批处理模式在编译和执行阶段是静默的，不输出任何信息，因此要快上一些。
+
+不同的引擎（pdfTeX、XeTeX、LuaTeX）的速度也会有些许差异。比如一般情况下 pdfTeX 速度要快于其他引擎，不过也有 [ptex-ng](https://github.com/clerkma/ptex-ng) 这种性能更高的引擎（是基于 C 语言的 TeX82 实现），我有幸尝试过一个私人版本，速度快得飞起。大家有兴趣可以邀请它的作者 @李阿玲 多科普科普这个引擎。
+
+不同的编译模式也有细微的影响。经过测试，使用批处理模式（`batchmode`）速度要优于默认的模式（不加参数）和其他一些模式（比如 `nonstopmode` 和 `scrollmode`）， 这是因为批处理模式在编译和执行阶段是静默的，不输出任何信息，因此要快上一些。
 
 ---
 
@@ -99,6 +103,17 @@ TeX 在 Linux 下的表现确实是大大优于 Windows 的。不过这个方法
 大家都有经验，复制很多小文件花费的时间，要远大于复制单个大文件的时间。TeX 的预编译把各种小文件打包成一个大文件，那么之后的编译，只需要导入和解析这个大文件就可以，就不用挨个再索引和导入各种零碎的小文件了。它在 I/O 速度上的提升正源于此。
 
 有一个 [`mylatexformat`](https://ctan.org/pkg/mylatexformat) 宏包，可以帮助用户预编译文件序言区。在 `mylatexformat` 之前其实有另外一个同样功能的宏包，叫 [`mylatex`](https://ctan.org/pkg/mylatex) 。不过我还是推荐使用 `mylatexformat`。
+
+当然还有人会提到一些其他的技巧，比如：
+
+    1. 将 TikZ 绘图的代码提前编译好，直接 include 生成的 pdf 文件
+    2. 避免使用 `ctex` 和 `tikz` 这样的庞大而零碎的宏包
+    3. 对于 pdfTeX 引擎，可以加上 `-draftmode` 参数
+    4. 对于 XeTeX 引擎，可以加上 `-output-driver='xdvipdfmx -z0' 参数调整压缩级别，用文件大小换取编译速度
+
+这些技巧的改善作用其实并不大，而且也有明显的适用范围限制。大家可以酌情尝试和选用。
+
+虽然上面提到不同的引擎（pdfTeX、XeTeX、LuaTeX）有速度差异，不过并不明显，所以不必纠结。
 
 下面着重介绍如何预编译 `.tex` 文件。
 
@@ -219,7 +234,7 @@ Transcript written on hello.log.
 
 - 预编译对 pdfTeX 的支持是比较好的，也支持大多数宏包。
 - 一旦涉及到某些字体相关的事情，预编译就会出现问题。这是因为 .fmt 格式本身就是上古时期的产物，没有兼顾到很多字体方面的事情。比如虽然文档中给出了 XeTeX 编译时的用法（使用 `xetex` 引擎和 `&xelatex` 参数），然而实际运行时总是会出现 `! Can't \dump a format with native fonts or font-mappings.` 的错误。所以不建议在预编译时使用 XeTeX 引擎。
-- 虽然 `ctex` 这样处理 CJK 字符的宏包还能用，也可以使用 `\kaishu` 和 `\lishu` 这样的宏，但是相关的 CJK 字体并不是无极缩放的，也就是放大到一定程度之后会出现锯齿。此外，`\setCJKmainfont` 这类更加复杂的宏也是无法使用的。
+- 虽然 `ctex` 这样处理 CJK 字符的宏包还能用，也可以使用 `\kaishu` 和 `\lishu` 这样的宏，但是相关的 CJK 字体并不是无级缩放的，也就是放大到一定程度之后会出现锯齿。此外，`\setCJKmainfont` 这类更加复杂的宏也是无法使用的。
 - 如果需要频繁修改序言区，那么可以先不预编译，以节省时间（虽然预编译也没有多花多少时间）。等到序言区的内容基本固定，只需要一次预编译，之后就可以只运行 `pdflatex -shell-escape "&hello" hello.tex` 这一条编译命令了。
 - 输出最后的成品时，还是建议直接使用 `pdflatex hello.tex` 或者 `xelatex hello.tex`，以消除预编译导致的一些格式和字体上的差异。
 
