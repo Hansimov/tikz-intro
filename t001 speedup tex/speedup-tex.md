@@ -106,10 +106,10 @@ TeX 在 Linux 下的表现确实是大大优于 Windows 的。不过这个方法
 
 当然还有人会提到一些其他的技巧，比如：
 
-    1. 将 TikZ 绘图的代码提前编译好，直接 include 生成的 pdf 文件
-    2. 避免使用 `ctex` 和 `tikz` 这样的庞大而零碎的宏包
-    3. 对于 pdfTeX 引擎，可以加上 `-draftmode` 参数
-    4. 对于 XeTeX 引擎，可以加上 `-output-driver='xdvipdfmx -z0' 参数调整压缩级别，用文件大小换取编译速度
+1. 将 TikZ 绘图的代码提前编译好，直接 include 生成的 pdf 文件
+2. 避免使用 `ctex` 和 `tikz` 这样的庞大而零碎的宏包
+3. 对于 pdfTeX 引擎，可以加上 `-draftmode` 参数
+4. 对于 XeTeX 引擎，可以加上 `-output-driver='xdvipdfmx -z0'` 参数调整压缩级别，用文件大小换取编译速度
 
 这些技巧的改善作用其实并不大，而且也有明显的适用范围限制。大家可以酌情尝试和选用。
 
