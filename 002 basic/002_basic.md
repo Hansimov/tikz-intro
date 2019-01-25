@@ -2,7 +2,8 @@
 
 <b>“20%的功能可以满足80%的需求。”</b>
 
-![ab](./images/ab.png)
+<img height="200" src="./images/ab.png">
+
 
 我们今天以上图作为案例，介绍 TikZ 中的三个基本概念：**节点（node）**，**路径（path）**，**样式（style）**。
 
@@ -24,7 +25,7 @@
 \end{document}
 ```
 
-## **初始环境配置**
+## **基础知识（熟手请跳过）**
 
 TeX 文档开头的 `\documentclass[options]{class}` 用于指定文档的类型，不同类型有不同的默认设置。
 
@@ -37,5 +38,13 @@ TeX 文档开头的 `\documentclass[options]{class}` 用于指定文档的类型
 我们可以用 `border=<length>` 设置页边的空白大小。比如 `border=5pt` 的作用是，在图形边缘留出宽为 5 个像素（pt）的空白。
 
 1 pt 约等于 1/72.27 inch 或 1/2.84 cm。默认情况下，一个大写字母 “M” 的宽度是 10pt（=1em）。
+
+`\begin{document}` 和 `\end{document}` 之间是正文。
+
+`\documentclass{...}` 和 `\begin{document}` 之间是 preamble，也叫序言或者导言，通常放一些初始的配置，比如导入宏包，设置页面格式，定义新的宏。
+
+要绘制一张 TikZ 图形，需要将绘图命令放在 `\begin{tikzpicture}` 和 `\end{tikzpicture}` 的环境中。
+
+## TikZ 版 Hello World
 
 

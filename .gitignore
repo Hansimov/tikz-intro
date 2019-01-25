@@ -1,5 +1,6 @@
 latex-temp/
 
+*.html
 *.log
 *.fmt
 *.aux

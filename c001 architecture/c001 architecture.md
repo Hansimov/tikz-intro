@@ -7,7 +7,7 @@
 
 这是 Wiki 词条 [冯·诺依曼结构](https://en.wikipedia.org/wiki/Von_Neumann_architecture) 中的 [示意图](https://en.wikipedia.org/wiki/File:Von_Neumann_Architecture.svg)。（原图为英文，我这里是重新绘制了中文的版本。）
 
-## 后记
+## **后记**
 
 **第一个案例我选了很久，既不能太复杂，又要尽可能覆盖常用的方法，还要兼顾不同专业背景的读者。**
 
