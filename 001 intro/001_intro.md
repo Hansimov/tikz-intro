@@ -61,7 +61,7 @@ RNA 密码子表：
 
 这么说吧，绝大多数**能够精确描述的矢量图**，理论上都可以用 TikZ 画出来。
 
-（PS：我以前写过一篇（还没有写完的）文章，详细对比了不同作图工具的优劣，以及适用场景，见： [常见绘图工具的对比](https://github.com/Hansimov/tikzpy/blob/master/doc/comparisons%20of%20tools.md)）
+（PS：我以前写过一篇（还没有写完的）文章，详细对比了不同作图工具的优劣，以及适用场景，见： [常见绘图工具的对比](https://github.com/Hansimov/tikzpy/blob/master/doc/001%20comparisons%20of%20tools.md)）
 
 
 ## **TikZ 的名字由来**
